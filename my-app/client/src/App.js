@@ -5,7 +5,7 @@
 // import NoMatch from "./pages/NoMatch";
 // import Login from "./pages/Login"
 // import RegistrationForm from "./components/RegistrationForm/RegistrationForm"
-//import Nav from "./components/Nav";
+import Navbar from "./components/Navbar";
 
 import React, {useState} from 'react';
 import './App.css';
@@ -29,6 +29,7 @@ function App() {
       <Router>
       <div className="App">
         <Header title={title}/>
+        <Navbar />
           <div className="container d-flex align-items-center flex-column">
             <Switch>
               <Route path="/" exact={true}>
