@@ -5,7 +5,7 @@
 // import NoMatch from "./pages/NoMatch";
 // import Login from "./pages/Login"
 // import RegistrationForm from "./components/RegistrationForm/RegistrationForm"
-//import Nav from "./components/Nav";
+import Navbar from "./components/Navbar";
 
 import React, {useState} from 'react';
 import './App.css';
@@ -13,6 +13,12 @@ import Header from './components/Header/Header';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Home from './components/Home/Home';
+import Summary from './components/Summary/Summary'
+import Positions from './components/Positions/Positions'
+import Trade from './components/Trade/Trade'
+import Realtime from './components/Realtime/Realtime'
+import History from './components/History/History'
+
 import PrivateRoute from './utils/PrivateRoute';
 import {
   BrowserRouter as Router,
@@ -29,6 +35,7 @@ function App() {
       <Router>
       <div className="App">
         <Header title={title}/>
+        <Navbar />
           <div className="container d-flex align-items-center flex-column">
             <Switch>
               <Route path="/" exact={true}>
@@ -43,6 +50,18 @@ function App() {
               <PrivateRoute path="/home">
                 <Home/>
               </PrivateRoute>
+              <PrivateRoute path="/positions">
+                <Positions/>
+              </PrivateRoute>
+              <PrivateRoute path="/trade">
+                <Trade/>
+              </PrivateRoute>
+              <PrivateRoute path="/realtime">
+                <Realtime/>
+              </PrivateRoute>   
+              <PrivateRoute path="/history">
+                <History/>
+              </PrivateRoute>           
             </Switch>
             <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           </div>
