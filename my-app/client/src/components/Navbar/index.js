@@ -13,9 +13,9 @@ function Navbar() {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link
-              to="/"
+              to="/summary"
               className={
-                window.location.pathname === "/" || window.location.pathname === "/summary"
+                  window.location.pathname === "/summary"
                   ? "nav-link active"
                   : "nav-link"
               }
@@ -41,16 +41,16 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link
-              to="/realtimechart"
-              className={window.location.pathname === "/realtimechart" ? "nav-link active" : "nav-link"}
+              to="/realtime"
+              className={window.location.pathname === "/realtime" ? "nav-link active" : "nav-link"}
             >
               Realtime Chart
             </Link>
           </li>
           <li className="nav-item">
             <Link
-              to="/historyperformance"
-              className={window.location.pathname === "/historyperformance" ? "nav-link active" : "nav-link"}
+              to="/history"
+              className={window.location.pathname === "/history" ? "nav-link active" : "nav-link"}
             >
               Portfolio Historical Performance
             </Link>
