@@ -1,12 +1,5 @@
-// import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Books from "./pages/Books";
-// import Detail from "./pages/Detail";
-// import NoMatch from "./pages/NoMatch";
-// import Login from "./pages/Login"
-// import RegistrationForm from "./components/RegistrationForm/RegistrationForm"
 import Navbar from "./components/Navbar";
-
+import UserContext from "./utils/UserContext";
 import React, {useState} from 'react';
 import './App.css';
 import Header from './components/Header/Header';
@@ -30,11 +23,13 @@ import AlertComponent from './components/AlertComponent/AlertComponent';
 function App() {
 
     const [title, updateTitle] = useState(null);
+    const [user,setUser]=useState(null);
     const [errorMessage, updateErrorMessage] = useState(null);
     return (
       <Router>
       <div className="App">
-        <Header title={title}/>
+      <UserContext.Provider value={{user}}>
+        <Header title={title} user={user} setUser={setUser}/>
         <Navbar />
           <div className="container d-flex align-items-center flex-column">
             <Switch>
@@ -45,10 +40,13 @@ function App() {
                 <RegistrationForm showError={updateErrorMessage} updateTitle={updateTitle}/>
               </Route>
               <Route path="/login">
-                <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
+                <LoginForm setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle}/>
               </Route>
               <PrivateRoute path="/home">
-                <Home/>
+                <Home user={user}/>
+              </PrivateRoute>
+              <PrivateRoute path="/summary">
+                <Summary/>
               </PrivateRoute>
               <PrivateRoute path="/positions">
                 <Positions/>
@@ -65,35 +63,10 @@ function App() {
             </Switch>
             <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
           </div>
+          </UserContext.Provider>
       </div>
       </Router>
     );
-
-
-
-
-    // <Router>
-    //   <div>
-    //     <Nav />
-    //     <Switch>
-    //       <Route exact path={["/","/registration"]}>
-    //         <RegistrationForm />
-    //       </Route>
-    //       <Route exact path="/Login">
-    //         <Login />
-    //       </Route>
-    //       <Route exact path="/books">
-    //         <Books />
-    //       </Route>
-    //       <Route exact path="/books/:id">
-    //         <Detail />
-    //       </Route>
-    //       <Route>
-    //         <NoMatch />
-    //       </Route>
-    //     </Switch>
-    //   </div>
-    // </Router>
 
 }
 

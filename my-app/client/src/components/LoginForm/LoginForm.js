@@ -31,6 +31,7 @@ function LoginForm(props) {
                         ...prevState,
                         'successMessage' : 'Login successful. Redirecting to home page..'
                     }))
+                    props.setUser(state.email);
                     localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
                     redirectToHome();
                     props.showError(null)
