@@ -15,9 +15,7 @@ function Navbar() {
             <Link
               to="/summary"
               className={
-                  window.location.pathname === "/summary"
-                  ? "nav-link active"
-                  : "nav-link"
+                  window.location.pathname === "/summary" ? "nav-link active": "nav-link"
               }
             >
               Summary
