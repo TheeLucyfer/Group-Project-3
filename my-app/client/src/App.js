@@ -43,7 +43,7 @@ function App() {
                 <LoginForm setUser={setUser} showError={updateErrorMessage} updateTitle={updateTitle}/>
               </Route>
               <PrivateRoute path="/home">
-                <Home user={user}/>
+                <Home/>
               </PrivateRoute>
               <PrivateRoute path="/summary">
                 <Summary/>
