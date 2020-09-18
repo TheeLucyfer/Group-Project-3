@@ -1,12 +1,16 @@
-import React from 'react';
+import React,{ useContext } from 'react';
 import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from '../../constants/apiConstants';
+import UserContext from  "../../utils/UserContext";
+
 function Header(props) {
     const capitalize = (s) => {
         if (typeof s !== 'string') return ''
         return s.charAt(0).toUpperCase() + s.slice(1)
     }
-    let title = capitalize(props.location.pathname.substring(1,props.location.pathname.length))
+    const { user} = useContext(UserContext);
+    let title = capitalize(props.location.pathname.substring(1,props.location.pathname.length));
+    console.log(user);
     if(props.location.pathname === '/') {
         title = 'Welcome'
     }
@@ -22,7 +26,8 @@ function Header(props) {
         }
     }
     function handleLogout() {
-        localStorage.removeItem(ACCESS_TOKEN_NAME)
+        props.setUser(null);
+        localStorage.removeItem(ACCESS_TOKEN_NAME);
         props.history.push('/login')
     }
     return(
