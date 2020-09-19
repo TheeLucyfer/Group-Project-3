@@ -21,23 +21,25 @@ export default {
       });
   },
  
-  getCurrPrice: function(ticker) {
-    axios({
-      "method":"GET",
-      "url":"https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"apidojo-yahoo-finance-v1.p.rapidapi.com",
-      "x-rapidapi-key":"c4e5d2b842msh6cffedf191a26dfp159c71jsn2ec40e87511b",
-      "useQueryString":true
-      },"params":{
-      "symbols":ticker,
-      "region":"US"
-      }
-      })
-    .then(res => {return res.quoteResponse.result[0].regularMarketPrice})
+  // getCurrPrice: function(ticker) {
+  //   axios({
+  //     "method":"GET",
+  //     "url":"https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes",
+  //     "headers":{
+  //     "content-type":"application/octet-stream",
+  //     "x-rapidapi-host":"apidojo-yahoo-finance-v1.p.rapidapi.com",
+  //     "x-rapidapi-key":"c4e5d2b842msh6cffedf191a26dfp159c71jsn2ec40e87511b",
+  //     "useQueryString":true
+  //     },"params":{
+  //     "symbols":ticker,
+  //     "region":"US"
+  //     }
+  //     })
+  //   .then(res => {return res.quoteResponse.result[0].regularMarketPrice})
+  // },
+  getCurrPrice:function(symbol){
+    return Math.round(20 + 80 * Math.random())
   },
-
   getMovers: function(){
 
     return axios({
@@ -57,7 +59,8 @@ export default {
       })
 
   },
-  getPrice:function(symbol){
-    return 116.
+  getPresetQ:function(props){
+    //Retrive the preset quantity for this user for a given ticker
+    return 10;
   }
 };
