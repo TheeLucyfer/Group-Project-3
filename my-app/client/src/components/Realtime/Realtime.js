@@ -12,20 +12,22 @@ function Realtime(props) {
   console.log('Hello,', user)
 
   useEffect(() => {
+    let timerId;
     axios.get(API_BASE_URL + '/user/me', { headers: { 'token': localStorage.getItem(ACCESS_TOKEN_NAME) } })
       .then(function (response) {
         if (response.status !== 200) {
           redirectToLogin()
         }
-        window.setInterval(() => {
+        timerId = window.setInterval(() => {
           setLineData({
             feeds: getFeeds()
           })
-        }, 10000)
+        }, 1000)
       })
       .catch(function (error) {
         redirectToLogin()
       });
+      return ()=>clearTimeout(timerId);
   })
   function redirectToLogin() {
     props.history.push('/login');

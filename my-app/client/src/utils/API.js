@@ -56,5 +56,8 @@ export default {
       }
       })
 
+  },
+  getPrice:function(symbol){
+    return 116.
   }
 };
