@@ -21,25 +21,25 @@ export default {
       });
   },
  
-  // getCurrPrice: function(ticker) {
-  //   axios({
-  //     "method":"GET",
-  //     "url":"https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes",
-  //     "headers":{
-  //     "content-type":"application/octet-stream",
-  //     "x-rapidapi-host":"apidojo-yahoo-finance-v1.p.rapidapi.com",
-  //     "x-rapidapi-key":"c4e5d2b842msh6cffedf191a26dfp159c71jsn2ec40e87511b",
-  //     "useQueryString":true
-  //     },"params":{
-  //     "symbols":ticker,
-  //     "region":"US"
-  //     }
-  //     })
-  //   .then(res => {return res.quoteResponse.result[0].regularMarketPrice})
-  // },
-  getCurrPrice:function(symbol){
-    return Math.round(20 + 80 * Math.random())
+  getCurrPrice: function(ticker) {
+    axios({
+      "method":"GET",
+      "url":"https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes",
+      "headers":{
+      "content-type":"application/octet-stream",
+      "x-rapidapi-host":"apidojo-yahoo-finance-v1.p.rapidapi.com",
+      "x-rapidapi-key":"c4e5d2b842msh6cffedf191a26dfp159c71jsn2ec40e87511b",
+      "useQueryString":true
+      },"params":{
+      "symbols":ticker,
+      "region":"US"
+      }
+      })
+    .then(res => {return res.data.quoteResponse.result[0].regularMarketPrice})
   },
+  // getCurrPrice:function(symbol){
+  //   return Math.round(20 + 80 * Math.random())
+  // },
   getMovers: function(){
 
     return axios({
