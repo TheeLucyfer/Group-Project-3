@@ -38,8 +38,7 @@ function Positions(props) {
     });
     
     function createData(symbol, quantity, cost) {
-      //API.getPrice(symbol).then(res=>{
-      const price=API.getPrice(symbol);
+      const price=API.getCurrPrice(symbol);
       const gain=(100.*(price-cost)/cost).toFixed(2);
       return { symbol, price, gain, quantity, cost }};
     

@@ -35,9 +35,11 @@ export default {
       "region":"US"
       }
       })
-    .then(res => {return res.quoteResponse.result[0].regularMarketPrice})
+    .then(res => {return res.data.quoteResponse.result[0].regularMarketPrice})
   },
-
+  // getCurrPrice:function(symbol){
+  //   return Math.round(20 + 80 * Math.random())
+  // },
   getMovers: function(){
 
     return axios({
@@ -56,5 +58,9 @@ export default {
       }
       })
 
+  },
+  getPresetQ:function(props){
+    //Retrive the preset quantity for this user for a given ticker
+    return 10;
   }
 };
