@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API"
+import API from "../../utils/yahooAPI"
 import axios from 'axios'
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiConstants';
 
@@ -43,7 +43,7 @@ function TradeForm(props) {
       })
 
   return (
-    <form >
+    <form style={{background:'gray'}}>
     <h1>{props.ticker}</h1>
   <p>Current Price: {state.price}</p>
     <p>Bid/Ask Price:</p>
