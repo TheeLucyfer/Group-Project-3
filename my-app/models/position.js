@@ -9,7 +9,8 @@ const positionSchema = new Schema({
     quantity: {type: Double, required: true},
     trading_quantity: {type: Double, required: true},
     trading_buy_price: {type: Double, required: true},
-    trading_sell_price: {type: Double, required: true}
+    trading_sell_price: {type: Double, required: true},
+    date: { type: Date, default: Date.now }
 
 })
 
