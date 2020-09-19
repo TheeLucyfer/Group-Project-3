@@ -12,28 +12,33 @@ function TradeForm(props) {
     
     const [state, setState]=useState(
         {
-            price:0
+            price:0,
+            quantity:API.getPresetQ(props.ticker)
         }
     );
-    const mySubmitHandler = (type) => {
+    const mySubmitHandler = (type,event) => {
+      
         console.log(type);
         if (type ==="buy"){
-           alert("You are buying " + state.ticker)}
+           alert("Finish buying " + String(state.quantity)+" "+props.ticker+" at " +String(state.price)+" per share")}
         else {
-            alert("You are selling " + state.ticker)
+            alert("You are selling " + props.ticker)
         }
       }
-    const myChangeHandler = (event) => {
-        setState({ticker: event.target.value});
+    const quantityChangeHandler = (event) => {
+        setState({price:state.price,quantity: event.target.value});
+        console.log('value',event.target.value)
+        console.log('state',state.quantity)
       }
 
       useEffect(() => {
         let timerId;
         timerId = window.setInterval(() => {
               setState({
+                quantity:state.quantity,
                 price: API.getCurrPrice(props.ticker)
               })
-            }, 5000);
+            }, 2000);
           return ()=>clearTimeout(timerId);
       })
 
@@ -44,20 +49,20 @@ function TradeForm(props) {
     <p>Bid/Ask Price:</p>
     <input
       type='text'
-      onChange={myChangeHandler}
       value={state.price}
       style={{width:'50%'}}
     />
     <p>Quantity:</p>
    <input
       type='text'
-      onChange={myChangeHandler}
+      onChange={quantityChangeHandler}
       style={{width:'50%'}}
       placeholder={API.getPresetQ(props.ticker)}
+      value={state.quantity}
     />
     <br/>
-    <button type="submit" name="action" value="Sell" onClick={() => mySubmitHandler('buy')}>Buy</button>
-     <button type="submit" name="action" value="Buy" onClick={() => mySubmitHandler('sell')}>Sell</button>
+    <button type="submit" name="action" value="Sell" onClick={() => mySubmitHandler('buy',Event)}>Buy</button>
+     <button type="submit" name="action" value="Buy" onClick={() => mySubmitHandler('sell',Event)}>Sell</button>
     </form>
 
   );
