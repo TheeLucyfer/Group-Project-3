@@ -2,6 +2,7 @@ import React,{ useContext } from 'react';
 import { withRouter } from "react-router-dom";
 import { ACCESS_TOKEN_NAME } from '../../constants/apiConstants';
 import UserContext from  "../../utils/UserContext";
+import "./style.css";
 
 function Header(props) {
     const capitalize = (s) => {
@@ -31,8 +32,8 @@ function Header(props) {
         props.history.push('/login')
     }
     return(
-        <nav className="navbar navbar-dark bg-primary">
-            <div className="row col-12 d-flex justify-content-center text-white">
+        <nav className="navbar navbar-dark test">
+            <div className="row col-12 d-flex justify-content-center text-white test">
                 <span className="h3">{props.title || title}</span>
                 {renderLogout()}
             </div>

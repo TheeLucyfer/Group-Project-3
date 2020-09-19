@@ -1,10 +1,21 @@
 .loginText {
-    color: #007bff;
+    color: #00c805;
     font-weight: bold;
     cursor: pointer;
 }
+.padding{
+    padding: 10000px;
+}
 
 .successMessage {
-    color: green;
+    color: #00c805;
     font-weight: bold;
+}
+
+.color {
+    color: #00c805;
+}
+.backgroundColor{
+    background-color: #00c805;
+    border-color: #00c805;
 }

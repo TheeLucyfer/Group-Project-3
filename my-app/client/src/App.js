@@ -11,6 +11,7 @@ import Positions from './components/Positions/Positions'
 import Trade from './components/Trade/Trade'
 import Realtime from './components/Realtime/Realtime'
 import History from './components/History/History'
+import "./App.css"
 
 import PrivateRoute from './utils/PrivateRoute';
 import {
