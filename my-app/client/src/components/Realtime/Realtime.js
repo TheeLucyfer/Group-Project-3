@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiConstants';
 import axios from 'axios'
 
-import API from '../../utils/API'
+import API from '../../utils/yahooAPI'
 import UserContext from "../../utils/UserContext";
 import LineChart from "../LineChart/LineChart"
 function Realtime(props) {
@@ -92,7 +92,7 @@ function Realtime(props) {
     });
 
   return (
-    <div className="main chart-wrapper" style={{width:"80%"}}>
+    <div className="main chart-wrapper" style={{width:"80%", background:"white"}}>
       <LineChart
         data={LineData.feeds[0].data}
         title={LineData.feeds[0].title}
