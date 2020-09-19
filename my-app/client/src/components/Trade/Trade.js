@@ -20,16 +20,20 @@ function Trade(props) {
     function redirectToLogin() {
     props.history.push('/login');
     }
-    const tickerArr=['AAPL','NVDA','TSLA','AMZN']
+    const tickerArr=['AAPL','NVDA','TSLA','AMZN','QQQ','SPY','SHOP']
     return(
       // <div className="row-12">
       <Card.Group> 
-
+        <div className='container'>
+            
+            <div className='row'>
             {tickerArr.map(ticker => (
-              <div style={{borderStyle:'solid', marginTop:'10px',height:'10%'}}>
+              <div className='col-md-3' style={{borderStyle:'solid', marginTop:'10px',height:'10%',marginRight:'10px'}}>
                   <TradeForm ticker={ticker} key={ticker}/>
                   </div>
                 ))}
+            </div>
+            </div>
        </Card.Group>     
 
     )
