@@ -1,4 +1,4 @@
-import React,{ useEffect, useContext } from 'react';
+import React,{ useEffect, useContext ,useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiConstants';
 import axios from 'axios'
@@ -15,6 +15,8 @@ import UserContext from  "../../utils/UserContext";
 
 function Positions(props) {
   const { user} = useContext(UserContext);
+  const [userPositions,setUserPositions] =useState([]);
+
   console.log('Hello,',user)
   
     useEffect(() => {
@@ -23,11 +25,29 @@ function Positions(props) {
             if(response.status !== 200){
               redirectToLogin()
             }
+              // get positions for this 
+    axios.get(API_BASE_URL+'/api/positions/'+user)
+    .then(function (response) {
+
+       console.log('data',response.data)
+       setUserPositions(response.data);
+       console.log('userPositions',userPositions);
+       const data=response.data;
+
+       const rows = data.map((item)=>{
+        return createData(item.ticker, item.quantity, item.cost)}
+       );
+       console.log('rows',rows);
+       setUserPositions(rows);
+
+   })
         })
         .catch(function (error) {
           redirectToLogin()
         });
-      })
+      },[])
+
+
     function redirectToLogin() {
     props.history.push('/login');
     }
@@ -36,6 +56,7 @@ function Positions(props) {
         minWidth: 650,
       },
     });
+
     
     function createData(symbol, quantity, cost) {
       const price=API.getCurrPrice(symbol);
@@ -43,11 +64,7 @@ function Positions(props) {
       return { symbol, price, gain, quantity, cost }};
     
     const classes = useStyles();
-    const rows = [
-      createData('AAPL', 10, 115.3),
-      createData('Gingerbread', 356, 16.0, 3.9),
-    ];
-
+    const rows=[createData('AAPL',10,100.0)]
 
     return(
         <div className="mt-2">
@@ -64,7 +81,7 @@ function Positions(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {userPositions.map((row) => (
             <TableRow key={row.symbol}>
               <TableCell component="th" scope="row">
                 {row.symbol}
