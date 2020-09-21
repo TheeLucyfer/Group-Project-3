@@ -40,7 +40,7 @@ function Trade(props) {
     function redirectToLogin() {
     props.history.push('/login');
     }
-    const tickerArr=['AAPL','NVDA','TSLA','AMZN','QQQ','SPY','SHOP']
+    //const tickerArr=['AAPL','NVDA','TSLA','AMZN','QQQ','SPY','SHOP']
 
     return(
       // <div className="row-12">
