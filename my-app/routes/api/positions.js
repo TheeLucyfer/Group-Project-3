@@ -7,6 +7,6 @@ router
     .get(positionsController.findUserPos)
     .post(positionsController.createPos)
     .put(positionsController.updatePos)
-    .delete(positionsController.remove)
+    .delete(positionsController.deletePos);
 
 module.exports = router;
