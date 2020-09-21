@@ -5,6 +5,8 @@ const positionsController = require("../../controllers/positionsController")
 router
     .route("/:email")
     .get(positionsController.findUserPos)
-    .post(positionsController.create)
+    .post(positionsController.createPos)
+    .put(positionsController.updatePos)
+    .delete(positionsController.remove)
 
 module.exports = router;
