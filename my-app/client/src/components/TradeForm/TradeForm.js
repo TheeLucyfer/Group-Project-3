@@ -1,34 +1,43 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect, useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/yahooAPI"
-import axios from 'axios'
 import { ACCESS_TOKEN_NAME, API_BASE_URL } from '../../constants/apiConstants';
+import axios from 'axios';
+import UserContext from  "../../utils/UserContext";
+
+
+
 
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 function TradeForm(props) {
 
-    
+    const { user} = useContext(UserContext);
+    console.log('TradeForm',user)
     const [state, setState]=useState(
         {
             price:0,
             quantity:API.getPresetQ(props.ticker)
         }
     );
-    const mySubmitHandler = (type,event) => {
+    const mySubmitHandler = (type) => {
       
-        console.log(type);
         if (type ==="buy"){
-           alert("Finish buying " + String(state.quantity)+" "+props.ticker+" at " +String(state.price)+" per share")}
+          // Push a new transaction into the database by sending a post request to 
+          axios.post(API_BASE_URL+'/api/positions/'+user, {ticker:props.ticker,email:user,quantity:state.quantity,cost:state.price,trading_buy_price:state.price*0.8,trading_quantity:state.quantity,trading_sell_price:state.price*1.2})
+            .then(function (response) {
+          alert(user+" Finish buying " + String(state.quantity)+" "+props.ticker+" at " +String(state.price)+" per share")})
+            }
+           //alert("Finish buying " + String(state.quantity)+" "+props.ticker+" at " +String(state.price)+" per share")}
         else {
-            alert("You are selling " + props.ticker)
+          axios.post(API_BASE_URL+'/api/positions/'+user, {ticker:props.ticker,email:user,quantity:state.quantity,cost:-state.price,trading_buy_price:state.price*0.8,trading_quantity:state.quantity,trading_sell_price:state.price*1.2})
+          .then(function (response) {
+        alert(user+" Finish selling " + String(state.quantity)+" "+props.ticker+" at " +String(state.price)+" per share")})
         }
       }
     const quantityChangeHandler = (event) => {
         setState({price:state.price,quantity: event.target.value});
-        console.log('value',event.target.value)
-        console.log('state',state.quantity)
       }
 
       useEffect(() => {
