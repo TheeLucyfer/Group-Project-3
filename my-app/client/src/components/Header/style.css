@@ -4,3 +4,7 @@
 .nav-item{
     padding: 0 250px 0 0;
 }
+.btn {
+    background-color: #1b1818;
+    border-color: white;
+}

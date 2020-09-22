@@ -58,6 +58,7 @@ function LoginForm(props) {
     return(
         <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
             <form>
+            <img src={require("../../Images/icon.png")} />
                 <div className="form-group text-left">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" 
@@ -84,7 +85,7 @@ function LoginForm(props) {
                 </div>
                 <button 
                     type="submit" 
-                    className="btn btn-primary"
+                    className="btn btn-primary color"
                     onClick={handleSubmitClick}
                 >Submit</button>
             </form>
