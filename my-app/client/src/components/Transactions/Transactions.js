@@ -13,11 +13,9 @@ import Paper from '@material-ui/core/Paper';
 import API from '../../utils/yahooAPI'
 import UserContext from  "../../utils/UserContext";
 
-function Positions(props) {
+function Transactions(props) {
   const { user} = useContext(UserContext);
   const [userPositions,setUserPositions] =useState([]);
-
-  console.log('Hello,',user)
   
     useEffect(() => {
         axios.get(API_BASE_URL+'/user/me', { headers: { 'token': localStorage.getItem(ACCESS_TOKEN_NAME) }})
@@ -29,17 +27,8 @@ function Positions(props) {
     axios.get(API_BASE_URL+'/api/positions/'+user)
     .then(function (response) {
 
-       console.log('data',response.data)
-       setUserPositions(response.data);
-       console.log('userPositions',userPositions);
        const data=response.data;
-       const mergedArr=mergeArr(data);
-       console.log('uniq',mergedArr)
-       const rows = mergedArr.map((item)=>{
-        return createData(item.ticker, item.quantity, item.cost)}
-       );
-       console.log('rows',rows);
-       setUserPositions(rows);
+       setUserPositions(data);
 
    })
         })
@@ -47,33 +36,6 @@ function Positions(props) {
           redirectToLogin()
         });
       },[])
-
-  function onlyUnique(value, index, self) { 
-      return self.indexOf(value) === index;
-  }
-  
-  
-  function mergeArr(arr){
-      const tickerArr=arr.map(item=>{
-        return item.ticker
-      })
-      const unique=tickerArr.filter(onlyUnique);
-      const nUniq=unique.length;
-      const output=[];
-      for (let i=0; i<nUniq; i++){
-          const totalCost=0;
-          const totalq=0;
-          for (let j=0; j<arr.length; j++){
-            if(arr[j].ticker===unique[i]){
-              totalCost+=arr[j].cost*arr[j].quantity;
-              totalq+=arr[j].quantity;
-            }
-          }
-          output.push({ticker:unique[i],quantity:totalq, cost:totalCost/totalq});
-      }
-      return output
-    };
-
 
 
     function redirectToLogin() {
@@ -96,28 +58,26 @@ function Positions(props) {
 
     return(
         <div className="mt-2">
-          <h1>Hello {user}, here are your positions: </h1>
+          <h1>Hello {user}, here are your transactions: </h1>
             <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Symbol</TableCell>
-            <TableCell align="right">Price</TableCell>
-            <TableCell align="right">Gain&nbsp;(%)</TableCell>
             <TableCell align="right">Quantity</TableCell>
             <TableCell align="right">Cost</TableCell>
+            <TableCell align="right">Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {userPositions.map((row) => (
             <TableRow key={row.symbol}>
               <TableCell component="th" scope="row">
-                {row.symbol}
+                {row.ticker}
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
-              <TableCell align="right">{row.gain}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">{row.cost}</TableCell>
+              <TableCell align="right">{row.date}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -127,4 +87,4 @@ function Positions(props) {
     )
 }
 
-export default withRouter(Positions);
+export default withRouter(Transactions);

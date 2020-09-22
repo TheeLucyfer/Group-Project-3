@@ -27,7 +27,7 @@ function Realtime(props) {
       .catch(function (error) {
         redirectToLogin()
       });
-      return ()=>clearTimeout(timerId);
+    return () => clearTimeout(timerId);
   })
   function redirectToLogin() {
     props.history.push('/login');
@@ -37,7 +37,7 @@ function Realtime(props) {
     // Create random array of objects
     let names = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let data = [];
-    for(var i = 0; i < numItems; i++) {
+    for (var i = 0; i < numItems; i++) {
       data.push({
         label: names[i],
         value: Math.round(20 + 80 * Math.random())
@@ -45,13 +45,13 @@ function Realtime(props) {
     }
     return data;
   }
-  
+
   function getRandomDateArray(numItems) {
     // Create random array of objects (with date)
     let data = [];
     let baseTime = new Date('2018-05-01T00:00:00').getTime();
     let dayMs = 24 * 60 * 60 * 1000;
-    for(var i = 0; i < numItems; i++) {
+    for (var i = 0; i < numItems; i++) {
       data.push({
         time: new Date(baseTime + i * dayMs),
         value: Math.round(20 + 80 * Math.random())
@@ -64,7 +64,7 @@ function Realtime(props) {
     let feeds = [];
 
     feeds.push({
-      title: 'Visits',
+      title: 'Price',
       data: getRandomDateArray(150)
     });
 
@@ -92,7 +92,13 @@ function Realtime(props) {
     });
 
   return (
-    <div className="main chart-wrapper" style={{width:"80%", background:"white"}}>
+    <div className="main chart-wrapper" style={{ width: "80%", background: "white" }}>
+      <select name="cars" id="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+      </select>
       <LineChart
         data={LineData.feeds[0].data}
         title={LineData.feeds[0].title}

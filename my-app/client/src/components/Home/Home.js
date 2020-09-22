@@ -18,8 +18,8 @@ function Home(props) {
     props.history.push('/login');
     }
     return(
-        <div className="mt-2">
-            Home page content
+        <div className="mt-2" style={{fontColor:'white'}}>
+            Welcome to Quick Money Trading Platform. We make trading super fast!
         </div>
     )
 }

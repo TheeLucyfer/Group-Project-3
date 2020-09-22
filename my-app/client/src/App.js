@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Home from './components/Home/Home';
-import Summary from './components/Summary/Summary'
+import Transactions from './components/Transactions/Transactions'
 import Positions from './components/Positions/Positions'
 import Trade from './components/Trade/Trade'
 import Realtime from './components/Realtime/Realtime'
@@ -46,14 +46,14 @@ function App() {
               <PrivateRoute path="/home">
                 <Home/>
               </PrivateRoute>
-              <PrivateRoute path="/summary">
-                <Summary/>
-              </PrivateRoute>
               <PrivateRoute path="/positions">
                 <Positions/>
               </PrivateRoute>
+              <PrivateRoute path="/transactions">
+                <Transactions/>
+              </PrivateRoute>
               <PrivateRoute path="/trade">
-                <Trade/>
+                <Trade showError={updateErrorMessage} updateTitle={updateTitle}/>
               </PrivateRoute>
               <PrivateRoute path="/realtime">
                 <Realtime/>
