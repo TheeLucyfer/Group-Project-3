@@ -6,9 +6,10 @@ import axios from 'axios'
 import API from '../../utils/yahooAPI'
 import UserContext from "../../utils/UserContext";
 import LineChart from "../LineChart/LineChart"
+
 function Realtime(props) {
   const { user } = useContext(UserContext);
-
+  const [userPositions,setUserPositions] =useState([]);
   console.log('Hello,', user)
 
   useEffect(() => {
@@ -18,7 +19,20 @@ function Realtime(props) {
         if (response.status !== 200) {
           redirectToLogin()
         }
-        timerId = window.setInterval(() => {
+
+    //     axios.get(API_BASE_URL+'/api/positions/'+user)
+    //     .then(function (response2) {
+    
+    //        const data=response2.data;
+    //        const mergedArr=mergeArr(data);
+    //        console.log('uniq',mergedArr)
+    //        setUserPositions(mergedArr);
+    
+    //    }).catch(function (error) {
+    //           redirectToLogin()
+    //         });
+      // setUserPositions([{ticker:'AAPL'},{ticker:'TSLA'}]);
+      timerId = window.setInterval(() => {
           setLineData({
             feeds: getFeeds()
           })
@@ -29,6 +43,34 @@ function Realtime(props) {
       });
     return () => clearTimeout(timerId);
   })
+
+
+  function onlyUnique(value, index, self) { 
+    return self.indexOf(value) === index;
+}
+
+
+function mergeArr(arr){
+    const tickerArr=arr.map(item=>{
+      return item.ticker
+    })
+    const unique=tickerArr.filter(onlyUnique);
+    const nUniq=unique.length;
+    const output=[];
+    for (let i=0; i<nUniq; i++){
+        const totalCost=0;
+        const totalq=0;
+        for (let j=0; j<arr.length; j++){
+          if(arr[j].ticker===unique[i]){
+            totalCost+=arr[j].cost*arr[j].quantity;
+            totalq+=arr[j].quantity;
+          }
+        }
+        output.push({ticker:unique[i],quantity:totalq, cost:totalCost/totalq});
+    }
+    return output
+  };
+
   function redirectToLogin() {
     props.history.push('/login');
   }
@@ -94,10 +136,11 @@ function Realtime(props) {
   return (
     <div className="main chart-wrapper" style={{ width: "80%", background: "white" }}>
       <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+      {['AAPL','TSLA'].map(ticker => (
+              
+                  <option value={ticker} >{ticker}</option>
+ 
+                ))}
       </select>
       <LineChart
         data={LineData.feeds[0].data}

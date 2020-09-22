@@ -58,7 +58,7 @@ function Transactions(props) {
 
     return(
         <div className="mt-2">
-          <h1>Hello {user}, here are your transactions: </h1>
+          <h1 style={{color:'white'}}>Hello {user}, here are your transactions: </h1>
             <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>

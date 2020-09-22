@@ -96,7 +96,7 @@ function Positions(props) {
 
     return(
         <div className="mt-2">
-          <h1>Hello {user}, here are your positions: </h1>
+          <h1 style={{color:'white'}}>Hello {user}, here are your positions: </h1>
             <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -117,7 +117,7 @@ function Positions(props) {
               <TableCell align="right">{row.price}</TableCell>
               <TableCell align="right">{row.gain}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
-              <TableCell align="right">{row.cost}</TableCell>
+              <TableCell align="right">{row.cost.toFixed(2)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
