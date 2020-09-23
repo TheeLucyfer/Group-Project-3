@@ -5,3 +5,8 @@
 .registerMessage {
     margin-top: 10vh;
 }
+
+.color{
+    background-color:#00c805;
+    color: white !important;
+}
