@@ -19,7 +19,7 @@ function Home(props) {
     }
     return(
         <div className="mt-2">
-            Home page content
+            <h1 style={{color:'white'}}>Welcome to Quick Money Trading Platform. We make trading super fast!</h1>
         </div>
     )
 }
